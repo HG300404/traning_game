@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <title>HTML5 Game</title>
+    <meta name="description" content="A basic HTML5 game">
+    <meta name="author" content="Huong">
+</head>
+
+<body>
+
+    <canvas id="canvas" width="750" height="400">
+        Your browser does not support the HTML5 canvas tag.
+    </canvas>
+
+    <script>
+        "use strict";
+        let canvas;
+        let context;
+
+        window.onload = init;
+
+        function init() {
+            // Get a reference to the canvas element
+            canvas = document.getElementById('canvas');
+            context = canvas.getContext('2d');
+
+            draw();
+        }
+
+        function draw() {
+            // Draw walls
+            context.fillStyle = '#8B4513'; 
+            context.fillRect(200, 150, 200, 150);
+
+            // Draw the roof
+            context.fillStyle = '#A52A2A';
+            context.beginPath();
+            context.moveTo(200, 150); 
+            context.lineTo(300, 50); 
+            context.lineTo(400, 150);
+            context.closePath();
+            context.fill();
+
+            // Draw the door
+            context.fillStyle = '#654321'; 
+            context.fillRect(270, 220, 60, 80); 
+
+            // Draw the left window
+            context.fillStyle = '#ADD8E6'; 
+            context.fillRect(220, 170, 40, 40); 
+
+            // Draw the right window
+            context.fillStyle = '#ADD8E6'; 
+            context.fillRect(340, 170, 40, 40);
+        }
+    </script>
+</body>
+
+</html>

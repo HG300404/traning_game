@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <title>HTML5 Game Animation</title>
+    <meta name="description" content="A basic HTML5 animation">
+    <meta name="author" content="Huong">
+</head>
+
+<body>
+
+    <canvas id="canvas" width="800" height="600" style="border:1px solid blue;">
+        Your browser does not support the HTML5 canvas tag.
+    </canvas>
+
+    <script>
+        "use strict";
+        let canvas;
+        let context;
+        let x = 50; 
+        let y = 300;
+        let dx = 2; 
+
+        window.onload = init;
+
+        function init() {
+            // Get a reference to the canvas
+            canvas = document.getElementById('canvas');
+            context = canvas.getContext('2d');
+
+            animate();
+        }
+
+        function draw() {
+            // Clear the canvas for each frame
+            context.clearRect(0, 0, canvas.width, canvas.height);
+
+            // Draw the circle
+            context.fillStyle = '#0099b0';
+            context.beginPath();
+            context.arc(x, y, 30, 0, Math.PI * 2);
+            context.fill();
+        }
+
+        function animate() {
+            draw();
+
+            // Update the position
+            x += dx;
+
+            if (x + 30 > canvas.width || x - 30 < 0) {
+                dx = -dx; 
+            }
+
+            requestAnimationFrame(animate);
+        }
+    </script>
+</body>
+
+</html>

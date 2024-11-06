@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <title>HTML5 Game Animation</title>
+    <meta name="description" content="A basic HTML5 animation">
+    <meta name="author" content="[Your name]">
+</head>
+
+<body>
+
+    <canvas id="canvas" width="800" height="600" style="border:1px solid blue;">
+        Your browser does not support the HTML5 canvas tag.
+    </canvas>
+
+    <script>
+        "use strict";
+        let canvas;
+        let context;
+        let x = 50;
+        let y = 300; 
+        let dx = 2;
+        let currentColor = '#0099b0'; 
+
+        window.onload = init;
+
+        function init() {
+            // Get a reference to the canvas
+            canvas = document.getElementById('canvas');
+            context = canvas.getContext('2d');
+
+            // Add an event listener to change the color when the canvas is clicked
+            canvas.addEventListener('click', changeColor);
+
+            animate();
+        }
+
+        function draw() {
+            // Create a linear gradient background
+            let gradient = context.createLinearGradient(0, 0, canvas.width, canvas.height);
+            gradient.addColorStop(0, 'lightblue');
+            gradient.addColorStop(1, 'purple');
+
+            // Fill the background with the gradient
+            context.fillStyle = gradient;
+            context.fillRect(0, 0, canvas.width, canvas.height);
+
+            // Draw the circle
+            context.fillStyle = currentColor;
+            context.beginPath();
+            context.arc(x, y, 30, 0, Math.PI * 2); // Draw a circle with radius 30
+            context.fill();
+        }
+
+        function animate() {
+            draw();
+
+            // Update the position
+            x += dx;
+
+            if (x + 30 > canvas.width || x - 30 < 0) {
+                dx = -dx; 
+            }
+
+            requestAnimationFrame(animate);
+        }
+
+        function changeColor() {
+            currentColor = '#' + Math.floor(Math.random() * 16777215).toString(16);
+        }
+    </script>
+</body>
+
+</html>
