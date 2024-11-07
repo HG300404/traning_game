@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Bar Chart</title>
+</head>
+
+<body>
+
+    <canvas id="chartCanvas" width="500" height="400">
+        Your browser does not support the HTML5 canvas tag.
+    </canvas>
+
+    <script>
+        "use strict";
+        let canvas = document.getElementById('chartCanvas');
+        let context = canvas.getContext('2d');
+
+        function drawBarChart() {
+            // Bar data (heights)
+            const barHeights = [100, 150, 200, 80, 130];
+            const barLabels = ['A', 'B', 'C', 'D', 'E'];
+            const barWidth = 50;
+            const gap = 30;
+            const startX = 50;
+            const baseY = 300;
+
+            context.font = '16px sans-serif';
+            context.textAlign = 'center';
+
+            // Draw bars and labels
+            for (let i = 0; i < barHeights.length; i++) {
+                // Draw bar
+                context.fillStyle = 'blue';
+                context.fillRect(startX + i * (barWidth + gap), baseY - barHeights[i], barWidth, barHeights[i]);
+
+                // Draw label
+                context.fillStyle = 'black';
+                context.fillText(barLabels[i], startX + i * (barWidth + gap) + barWidth / 2, baseY + 20);
+            }
+
+            // Draw X-axis
+            context.beginPath();
+            context.moveTo(30, baseY);
+            context.lineTo(470, baseY);
+            context.lineWidth = 2;
+            context.strokeStyle = 'black';
+            context.stroke();
+        }
+
+        window.onload = drawBarChart;
+    </script>
+
+</body>
+
+</html>

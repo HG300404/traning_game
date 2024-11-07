@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>YouTube Logo on Canvas</title>
+</head>
+
+<body>
+
+    <canvas id="iconCanvas" width="500" height="300">
+        Your browser does not support the HTML5 canvas tag.
+    </canvas>
+
+    <script>
+        "use strict";
+        let canvas = document.getElementById('iconCanvas');
+        let context = canvas.getContext('2d');
+
+        function drawSVGPath(pathData, scale = 1, offsetX = 0, offsetY = 0, color = 'black') {
+            context.save();
+            context.beginPath();
+            context.scale(scale, scale);
+            context.translate(offsetX, offsetY);
+            context.fillStyle = color;
+
+            // Create a new path from the path data string
+            let path = new Path2D(pathData);
+
+            // Fill the path with the chosen color
+            context.fill(path);
+            context.restore();
+        }
+
+        window.onload = function () {
+            // Path data for the YouTube logo background and play button
+            const backgroundPathData = "M 50,25 C 50,20 55,15 60,15 H 440 C 445,15 450,20 450,25 V 275 C 450,280 445,285 440,285 H 60 C 55,285 50,280 50,275 Z";
+            const playButtonPathData = "M 200,100 L 320,150 L 200,200 Z";
+
+            // Draw the YouTube background (rounded rectangle)
+            drawSVGPath(backgroundPathData, 1, 0, 0, 'red');
+            // Draw the play button (triangle)
+            drawSVGPath(playButtonPathData, 1, 0, 0, 'white');
+        };
+    </script>
+
+</body>
+
+</html>

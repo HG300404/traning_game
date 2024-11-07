@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Custom Logo</title>
+    <meta name="description" content="Custom logo design using HTML5 Canvas">
+    <meta name="author" content="Huong">
+</head>
+
+<body>
+
+    <canvas id="logoCanvas" width="500" height="300">
+        Your browser does not support the HTML5 canvas tag.
+    </canvas>
+
+    <script>
+        "use strict";
+        let logoCanvas;
+        let logoContext;
+
+        window.onload = init;
+
+        function init() {
+            // Get a reference to the canvas element for the logo
+            logoCanvas = document.getElementById('logoCanvas');
+            logoContext = logoCanvas.getContext('2d');
+
+            drawLogo();
+        }
+
+        function drawLogo() {
+            // Draw a star shape
+            logoContext.beginPath();
+            for (let i = 0; i < 5; i++) {
+                logoContext.lineTo(
+                    250 + 70 * Math.cos((Math.PI / 2) + (i * 2 * Math.PI / 5)),
+                    150 - 70 * Math.sin((Math.PI / 2) + (i * 2 * Math.PI / 5))
+                );
+            }
+            logoContext.closePath();
+            logoContext.fillStyle = '#FFA500'; // Orange fill color
+            logoContext.fill();
+            logoContext.lineWidth = 3;
+            logoContext.strokeStyle = '#FF4500'; // OrangeRed stroke color
+            logoContext.stroke();
+
+            // Draw a circle inside the star
+            logoContext.beginPath();
+            logoContext.arc(250, 150, 30, 0, Math.PI * 2);
+            logoContext.fillStyle = '#00BFFF'; // DeepSkyBlue fill color
+            logoContext.fill();
+            logoContext.lineWidth = 2;
+            logoContext.strokeStyle = '#1E90FF'; // DodgerBlue stroke color
+            logoContext.stroke();
+            logoContext.closePath();
+
+            // Add text above the logo
+            logoContext.font = '30px Verdana';
+            logoContext.fillStyle = '#000';
+            logoContext.textAlign = 'center';
+            logoContext.fillText('Star Logo', 250, 40);
+        }
+    </script>
+
+</body>
+
+</html>
