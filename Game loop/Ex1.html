@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Moving Circle Game</title>
+    <meta name="description" content="A basic HTML5 game with a moving circle">
+</head>
+
+<body>
+    <canvas id="canvas" width="750" height="400">
+        Your browser does not support the HTML5 canvas tag.
+    </canvas>
+
+    <script>
+        // Set up canvas and context
+        const canvas = document.getElementById('canvas');
+        const context = canvas.getContext('2d');
+
+        // Circle properties
+        let circleX = 50;
+        let circleY = canvas.height / 2;
+        let speedX = 100; // pixels per second
+
+        let oldTimeStamp = 0;
+
+        function gameLoop(timeStamp) {
+            // Calculate time passed
+            let secondsPassed = (timeStamp - oldTimeStamp) / 1000;
+            oldTimeStamp = timeStamp;
+
+            // Move the circle
+            circleX += speedX * secondsPassed;
+
+            // Check boundaries to make the circle bounce
+            if (circleX > canvas.width - 20 || circleX < 20) {
+                speedX = -speedX; // Reverse direction
+            }
+
+            // Clear the canvas
+            context.clearRect(0, 0, canvas.width, canvas.height);
+
+            // Draw the circle
+            context.beginPath();
+            context.arc(circleX, circleY, 20, 0, Math.PI * 2);
+            context.fillStyle = 'blue';
+            context.fill();
+            context.closePath();
+
+            // Request the next frame
+            window.requestAnimationFrame(gameLoop);
+        }
+
+        // Start the game loop
+        window.requestAnimationFrame(gameLoop);
+    </script>
+</body>
+
+</html>
